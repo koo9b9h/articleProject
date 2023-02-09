@@ -16,6 +16,6 @@ public class ArticleDTO {
     private String title;
     private String contents;
     private int view;
-    private Timestamp create_time;
-    private Timestamp modified_time;
+    private Timestamp createTime;
+    private Timestamp modifiedTime;
 }

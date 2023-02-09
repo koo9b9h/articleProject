@@ -26,9 +26,7 @@
                                     request.getRequestDispatcher("/categoryReturn").include(request,response);
                                     CategoryDTO categoryDTO = (CategoryDTO)request.getAttribute("categoryNames");
                                     for(String categoryName :categoryDTO.getCategoryNames()){
-                                %>
-                                    <%= "<option value="+categoryName+">"+categoryName+"</option>" %>
-                                <%
+                                        out.print("<option value="+categoryName+">"+categoryName+"</option>");
                                     }//for
                                 %>
                             </select>

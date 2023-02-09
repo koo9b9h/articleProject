@@ -35,6 +35,11 @@
         <jsp-file>/WEB-INF/JSP/service/categoryReturn.jsp</jsp-file>
     </servlet>
 
+    <servlet>
+        <servlet-name>listPresentation</servlet-name>
+        <jsp-file>/WEB-INF/JSP/service/listPresentation.jsp</jsp-file>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>list</servlet-name>
         <url-pattern>/boards/free/list</url-pattern>
@@ -61,5 +66,11 @@
         <servlet-name>categoryReturn</servlet-name>
         <url-pattern>/categoryReturn</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>listPresentation</servlet-name>
+        <url-pattern>/listPresentation</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

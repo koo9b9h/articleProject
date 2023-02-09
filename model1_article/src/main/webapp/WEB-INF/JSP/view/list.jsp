@@ -1,10 +1,22 @@
-
+<%@ page import="com.example.model1_article.DTO.CategoryDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.model1_article.DTO.ArticleDTO" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.example.model1_article.DTO.PageDTO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>JSP - Hello World</title>
 </head>
+<%
+    request.getRequestDispatcher("/categoryReturn").include(request,response);
+    request.getRequestDispatcher("/listPresentation").include(request,response);
+    PageDTO pageDTO = (PageDTO) request.getAttribute("pageDTO");
+    List<ArticleDTO> articles = (List<ArticleDTO>) request.getAttribute("articles");
+    CategoryDTO categoryDTO = (CategoryDTO)request.getAttribute("categoryNames");
+%>
+
 
 <body>
     <header>
@@ -19,10 +31,11 @@
 
                 <select id="category" name="category">
                     <option value="all">전체 카테고리</option>
-                    <%-- JSP로 동적이게 변경소요 --%>
-                    <option value="category1">Category예시 1</option>
-                    <option value="category2">Category예시 2</option>
-                    <option value="category3">Category예시 3</option>
+                    <%
+                        for(String categoryName :categoryDTO.getCategoryNames()){
+                            out.print("<option value="+categoryName+">"+categoryName+"</option>");
+                        }//for
+                    %>
                 </select>
 
                 <input type="text" id="searchTerm" name="searchTerm" >
@@ -33,7 +46,7 @@
     </header>
 
     <section>
-        <header>총 <%="동적"%> 건</header>
+        <header>총 <%= pageDTO.getArticleTotalCount()%> 건</header>
         <article>
             <table>
                 <thead>
@@ -49,7 +62,20 @@
                 </thead>
                 <tbody>
                     <%
-                        //if 문이랑 out.println()으로 동적으로 게시글이 추가 되게 구현
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        for(ArticleDTO article : articles){
+                    %>
+                        <tr>
+                            <td><%= article.getCategoryName()%></td>
+                            <td></td>
+                            <td><%= article.getTitle()%></td>
+                            <td><%= article.getAuthor()%></td>
+                            <td><%= article.getView()%></td>
+                            <td><%= simpleDateFormat.format(article.getCreateTime())%></td>
+                            <td><%= simpleDateFormat.format(article.getModifiedTime())%></td>
+                        </tr>
+                    <%
+                        }//for
                     %>
                 </tbody>
 
@@ -59,8 +85,13 @@
         <footer>
             <div>
                 <%
-                    // 페이징 처리 코드 넣기
-
+                    for(int pageCount = 1; pageCount <= pageDTO.getTotalPages(); pageCount++){
+                        if(pageCount == pageDTO.getCrrentPage()) {
+                            out.print(pageCount + " ");
+                            continue;
+                        }
+                        out.println("<a href='?currentPage=" + pageCount + "'>" + pageCount + "</a> ");
+                    }
                 %>
             </div>
 

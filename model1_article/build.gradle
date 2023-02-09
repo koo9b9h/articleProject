@@ -22,6 +22,7 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    compileOnly group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.3'
     compileOnly('javax.servlet:javax.servlet-api:4.0.1')
     implementation('org.apache.cxf:cxf-rt-frontend-jaxrs:3.4.5')
     implementation('org.apache.cxf:cxf-rt-frontend-jaxws:3.4.5')
