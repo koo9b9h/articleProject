@@ -1,29 +1,29 @@
 package com.example.model1_article.validation;
 
-import com.example.model1_article.DTO.RegisterRequiredDTO;
+import com.example.model1_article.DTO.ArticleDTO;
 
 public class ArticleInputData {
-    public boolean availableCheck(RegisterRequiredDTO registerRequiredDTO, String confirm_password) {
+    public boolean availableCheck(ArticleDTO articleDTO, String confirm_password) {
 
-        if (registerRequiredDTO.getAuthor().length() < 3 || registerRequiredDTO.getAuthor().length() >= 5) {
-            System.out.println(registerRequiredDTO.getAuthor() + "/" + registerRequiredDTO.getAuthor().length());
+        if (articleDTO.getAuthor().length() < 3 || articleDTO.getAuthor().length() >= 5) {
+            System.out.println(articleDTO.getAuthor() + "/" + articleDTO.getAuthor().length());
             return false;
         }
 
-        if (registerRequiredDTO.getPassword().length() < 4 || registerRequiredDTO.getPassword().length() >= 16) {
+        if (articleDTO.getPassword().length() < 4 || articleDTO.getPassword().length() >= 16) {
             return false;
         }
 
-        if (!(registerRequiredDTO.getPassword().equals(confirm_password))) {
+        if (!(articleDTO.getPassword().equals(confirm_password))) {
             return false;
         }
 
-        if (registerRequiredDTO.getTitle().length() < 4 || registerRequiredDTO.getTitle().length() >= 100) {
-            System.out.println(registerRequiredDTO.getTitle() + "/" + registerRequiredDTO.getTitle().length());
+        if (articleDTO.getTitle().length() < 4 || articleDTO.getTitle().length() >= 100) {
+            System.out.println(articleDTO.getTitle() + "/" + articleDTO.getTitle().length());
             return false;
         }
 
-        if (registerRequiredDTO.getContents().length() < 4 || registerRequiredDTO.getContents().length() >= 2000) {
+        if (articleDTO.getContents().length() < 4 || articleDTO.getContents().length() >= 2000) {
             return false;
         }
         return true;

@@ -1,9 +1,12 @@
+<%@ page import="com.example.model1_article.DTO.CategoryDTO" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
         <script type="text/javascript" src="http://localhost:8080/JS/validation.js"></script>
-        <title>JSP - Hello World</title>
+        <link rel="stylesheet" href="http://localhost:8080/CSS/write.css">
+
+        <title>게시글 등록</title>
     </head>
 
     <body>
@@ -19,9 +22,15 @@
                         <td><h3>카테고리* </h3></td>
                         <td>
                             <select name="category" required>
-                                <% //이 부분 동적으로 만들기 %>
-                                <option value="java">java</option>
-                                <option value="javascript">javascript</option>
+                                <%
+                                    request.getRequestDispatcher("/categoryReturn").include(request,response);
+                                    CategoryDTO categoryDTO = (CategoryDTO)request.getAttribute("categoryNames");
+                                    for(String categoryName :categoryDTO.getCategoryNames()){
+                                %>
+                                    <%= "<option value="+categoryName+">"+categoryName+"</option>" %>
+                                <%
+                                    }//for
+                                %>
                             </select>
                         </td>
                     </tr>
@@ -45,17 +54,19 @@
                     <tr>
                         <td><h3>첨부 파일</h3></td>
                         <td>
-                            <input type="file" name="attachment1"><br><br>
-                            <input type="file" name="attachment2"><br><br>
-                            <input type="file" name="attachment3">
+                            <input type="file" name="attachment1" ><br><br>
+                            <input type="file" name="attachment2" ><br><br>
+                            <input type="file" name="attachment3" >
                         </td>
                     </tr>
                 </table>
             </form>
 
+        </article>
+        <footer>
             <button onclick="location.href='/boards/free/list'">취소</button>
             <input type="submit" form="registerForm" value="저장" onclick="return validateForm()">
-        </article>
+        </footer>
     </section>
     </body>
 </html>

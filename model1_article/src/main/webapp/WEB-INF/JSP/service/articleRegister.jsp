@@ -1,4 +1,4 @@
-<%@ page import="com.example.model1_article.DTO.RegisterRequiredDTO" %>
+<%@ page import="com.example.model1_article.DTO.ArticleDTO" %>
 <%@ page import="com.example.model1_article.validation.ArticleInputData" %>
 <%@ page import="org.apache.commons.fileupload.*" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
@@ -14,7 +14,7 @@
 <%
     String confirm_password = null;
 
-    RegisterRequiredDTO registerRequiredDTO = new RegisterRequiredDTO();
+    ArticleDTO articleDTO = new ArticleDTO();
     ArticleInputData articleInputData = new ArticleInputData();
     ArticleRepository articleRepository = new ArticleRepositoryImpl();
 
@@ -25,27 +25,27 @@
     for (FileItem item : items) {
         String fieldName = item.getFieldName();
         if (fieldName.equals("category")) {
-            registerRequiredDTO.setCategoryName(item.getString("UTF-8"));
+            articleDTO.setCategoryName(item.getString("UTF-8"));
         }
         if (fieldName.equals("author")) {
-            registerRequiredDTO.setAuthor(item.getString("UTF-8"));
+            articleDTO.setAuthor(item.getString("UTF-8"));
         }
         if (fieldName.equals("title")) {
-            registerRequiredDTO.setTitle(item.getString("UTF-8"));
+            articleDTO.setTitle(item.getString("UTF-8"));
         }
         if (fieldName.equals("content")) {
-            registerRequiredDTO.setContents(item.getString("UTF-8"));
+            articleDTO.setContents(item.getString("UTF-8"));
         }
         if (fieldName.equals("password")) {
-            registerRequiredDTO.setPassword(item.getString("UTF-8"));
+            articleDTO.setPassword(item.getString("UTF-8"));
         }
         if (fieldName.equals("confirm_password")) {
             confirm_password = item.getString("UTF-8");
         }
     }
 
-    if(articleInputData.availableCheck(registerRequiredDTO,confirm_password)) {
-        articleRepository.register(registerRequiredDTO);
+    if(articleInputData.availableCheck(articleDTO,confirm_password)) {
+        articleRepository.register(articleDTO);
         response.sendRedirect("boards/free/list");
     }
 %>
