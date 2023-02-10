@@ -7,14 +7,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <link rel="stylesheet" href="http://localhost:8080/CSS/list.css">
+    <title>게시판 목록</title>
 </head>
 <%
-    request.getRequestDispatcher("/categoryReturn").include(request,response);
-    request.getRequestDispatcher("/listPresentation").include(request,response);
-    PageDTO pageDTO = (PageDTO) request.getAttribute("pageDTO");
-    List<ArticleDTO> articles = (List<ArticleDTO>) request.getAttribute("articles");
-    CategoryDTO categoryDTO = (CategoryDTO)request.getAttribute("categoryNames");
+//    try {
+        request.getRequestDispatcher("/categoryReturn").include(request, response);
+        request.getRequestDispatcher("/listPresentation").include(request, response);
+        PageDTO pageDTO = (PageDTO) request.getAttribute("pageDTO");
+        List<ArticleDTO> articles = (List<ArticleDTO>) request.getAttribute("articles");
+        CategoryDTO categoryDTO = (CategoryDTO) request.getAttribute("categoryNames");
 %>
 
 
@@ -83,15 +85,37 @@
         </article>
 
         <footer>
-            <div>
+            <div id="pageDiv">
                 <%
+                    if(pageDTO.getCrrentPage() > 1) {
+                        out.println("<a href='?currentPage=" + 1 + "'>" + "◀◀" + "</a> ");
+                        out.println("<a href='?currentPage=" + (pageDTO.getCrrentPage() - 1) + "'>" + "◀" + "</a> ");
+                    }//if
+                    if(pageDTO.getCrrentPage() == 1) {
+                        out.println( "<span>" + "◀◀" + "</span>");
+                        out.println( "<span>"+ "◀"+ "</span>");
+                    }//if
+
                     for(int pageCount = 1; pageCount <= pageDTO.getTotalPages(); pageCount++){
                         if(pageCount == pageDTO.getCrrentPage()) {
-                            out.print(pageCount + " ");
+                            out.print("<span id='currentPage'>"+ pageCount + "</span>");
                             continue;
-                        }
+                        }//if
                         out.println("<a href='?currentPage=" + pageCount + "'>" + pageCount + "</a> ");
-                    }
+                    }//for
+
+                    if(pageDTO.getCrrentPage() < pageDTO.getTotalPages()) {
+                        out.println("<a href='?currentPage=" + (pageDTO.getCrrentPage() + 1) + "'>" + "▶" + "</a> ");
+                        out.println("<a href='?currentPage=" + pageDTO.getTotalPages() + "'>" + "▶▶" + "</a> ");
+                    }//if
+                    if(pageDTO.getCrrentPage() == pageDTO.getTotalPages()) {
+                        out.println( "<span>" + "▶" + "</span>");
+                        out.println( "<span>"+ "▶▶"+ "</span>");
+                    }//if
+
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+//                    }
                 %>
             </div>
 

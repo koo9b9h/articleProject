@@ -1,22 +1,16 @@
 package com.example.model1_article.DAO;
 
 
+import lombok.extern.log4j.Log4j2;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ArticleDAOImpl implements ArticleDAO {
 
-    private int categoryId;
-    private String author;
-    private String password;
-    private String title;
-    private String contents;
-    private Timestamp create_time;
-    private Timestamp modified_time;
-    private int view;
+public class ArticleDAOImpl implements ArticleDAO {
 
     public ArticleDAOImpl() {
         try {
@@ -54,52 +48,133 @@ public class ArticleDAOImpl implements ArticleDAO {
         } //try-catch
     }//insertArticle
 
+    // DTO를 쓰면 코드가 줄지만 이 디렉토리 범위 내에서 DTO가 관여되지 않게 하려고 함.
+    // 보여주는 기능과 검색 조건 기능까지 있어서 기능이 분리를 할 수 있다면 분리하면 좋을까 고민
+    public List<Map<String, Object>> selectAll(int start, int recordsParPage,
+                                               Timestamp startDate, Timestamp endDate, Integer categoryId, String searchTerm) {
 
-    public List<Map<String,Object>> selectAll(int start,int recordsParPage) {
-        String query = "SELECT title, contents, views, create_time, modified_time, author, category_id " +
-                "FROM articles LIMIT " + start +"," + recordsParPage ;
-        List<Map<String,Object>> articles = new ArrayList<>();
+        List<Map<String, Object>> articles = new ArrayList<>();
+        String categoryQuery = "";
+        String searchQuery = "";
+        String dateQuery = "";
+        int qeuryIndex = 0;
+
+        if (categoryId != null) {
+            categoryQuery = "AND category_id = ? ";
+        }
+        if (searchTerm != null && searchTerm != "") {
+            searchQuery = "AND (author LIKE '%' + ? + '%' OR title LIKE '%' + ? + '%' OR contents LIKE '%' + ? + '%')";
+        }
+        if (startDate != null && endDate != null) {
+            dateQuery = "AND create_time BETWEEN ? AND ? ";
+        }
+        String query = "SELECT title, contents, views, create_time, modified_time, author, category_id "
+                + "FROM articles "
+                + "WHERE (1=1)"
+                + categoryQuery
+                + searchQuery
+                + dateQuery
+                + "LIMIT ?,?";
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(query);
+
+            if (categoryId != null) {
+                pstmt.setInt(1, categoryId);
+                qeuryIndex += 1;
+            }
+            if (searchTerm != null && searchTerm != "") {
+                pstmt.setString(1 + qeuryIndex, '%' + searchTerm + '%');
+                pstmt.setString(2 + qeuryIndex, '%' + searchTerm + '%');
+                pstmt.setString(3 + qeuryIndex, '%' + searchTerm + '%');
+                qeuryIndex += 3;
+            }
+            if (startDate != null && endDate != null) {
+                pstmt.setTimestamp(1 + qeuryIndex, startDate);
+                pstmt.setTimestamp(2 + qeuryIndex, endDate);
+                qeuryIndex += 2;
+            }
+            pstmt.setInt(1 + qeuryIndex, start);
+            pstmt.setInt(2 + qeuryIndex, recordsParPage);
+
             ResultSet rs = pstmt.executeQuery();
 
             try (conn; pstmt; rs) {
+
                 while (rs.next()) {
-                    Map<String,Object> article = new HashMap<>();
-                    article.put("title",rs.getString("title"));
-                    article.put("contents",rs.getString("contents"));
-                    article.put("author",rs.getString("author"));
-                    article.put("views",rs.getInt("views"));
-                    article.put("createTime",rs.getTimestamp("create_time"));
-                    article.put("modifiedTime",rs.getTimestamp("modified_time"));
-                    article.put("categoryId",rs.getInt("category_Id"));
+                    Map<String, Object> article = new HashMap<>();
+                    article.put("title", rs.getString("title"));
+                    article.put("contents", rs.getString("contents"));
+                    article.put("author", rs.getString("author"));
+                    article.put("views", rs.getInt("views"));
+                    article.put("createTime", rs.getTimestamp("create_time"));
+                    article.put("modifiedTime", rs.getTimestamp("modified_time"));
+                    article.put("categoryId", rs.getInt("category_id"));
                     articles.add(article);
                 }
             }// try-with-resources
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } //try-catch
         return articles;
     }
 
+    // JDBC sql 틀린거 잡아내느라 시간 다 씀
     @Override
-    public int selectAllCount() {
-        int totalCount = 0;
-        String query = "SELECT COUNT(*) FROM articles";
+    public Integer selectAllCount(Timestamp startDate, Timestamp endDate, Integer categoryId, String searchTerm) {
+        Integer totalcount = 0;
+        String categoryQuery = "";
+        String searchQuery = "";
+        String dateQuery = "";
+        int qeuryIndex = 0;
+
+        if (categoryId != null) {
+            categoryQuery = "AND category_id = ? ";
+        }
+        if (searchTerm != null && searchTerm != "") {
+            searchQuery = "AND (author LIKE '%' + ? + '%' OR title LIKE '%' + ? + '%' OR contents LIKE '%' + ? + '%')";
+        }
+        if (startDate != null && endDate != null) {
+            dateQuery = "AND create_time BETWEEN ? AND ? ";
+        }
+
+        String query = "SELECT COUNT(*) "
+                + "FROM articles "
+                + "WHERE (1=1)"
+                + categoryQuery
+                + searchQuery
+                + dateQuery;
+
         try {
             Connection conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             PreparedStatement pstmt = conn.prepareStatement(query);
+
+            if (categoryId != null) {
+                pstmt.setInt(1 + qeuryIndex, categoryId);
+                qeuryIndex += 1;
+            }
+            if (searchTerm != null && searchTerm != "") {
+                pstmt.setString(1 + qeuryIndex, '%' + searchTerm + '%');
+                pstmt.setString(2 + qeuryIndex, '%' + searchTerm + '%');
+                pstmt.setString(3 + qeuryIndex, '%' + searchTerm + '%');
+                qeuryIndex += 3;
+            }
+            if (startDate != null && endDate != null) {
+                pstmt.setTimestamp(1 + qeuryIndex, startDate);
+                pstmt.setTimestamp(2 + qeuryIndex, endDate);
+            }
+
             ResultSet rs = pstmt.executeQuery();
+
             try (conn; pstmt; rs) {
                 rs.next();
-                totalCount = rs.getInt(1);
+                totalcount = rs.getInt(1);
             }// try-with-resources
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } //try-catch
-        return totalCount;
+
+        return totalcount;
     }
 
-
-}// end class
+}//end class

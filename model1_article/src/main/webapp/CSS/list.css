@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+header h1 {
+    text-align: center;
+    margin: 40px;
+
+}
+
+#requirement {
+    display: flex;
+    justify-content: center;
+    margin: 70px;
+    margin-bottom: 0px;
+    font-weight: bolder;
+    font-size: 12px;
+}
+
+#requirement label {
+    margin-right: 10px;
+}
+
+#requirement input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#requirement select {
+    height: 30px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+#requirement input[type="submit"] {
+    height: 35px;
+    padding: 5px 20px;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 12px;
+    color: white;
+}
+
+section header {
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+    color: #0a3c65;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #337ab7;
+    padding: 10px;
+    text-align: center;
+}
+
+table td{
+    font-weight: bolder;
+    font-size: 17px;
+    color: #0a3c65;
+}
+
+
+table th {
+    background-color: #337ab7;
+    color: #fff;
+    font-size: 20px;
+}
+
+#pageDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+footer button {
+    height: 50px;
+    width: 100px;
+    padding: 5px 20px;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 20px;
+    float: right;
+}
+
+
+#pageDiv > * {
+    margin: 10px;
+    margin-bottom: 0px;
+    color: #337ab7;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#currentPage{
+    color: #0a3c65;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #23527c;
+}

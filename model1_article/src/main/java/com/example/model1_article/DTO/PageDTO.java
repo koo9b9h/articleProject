@@ -8,10 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class PageDTO {
-    static int beforePage = 0;
-    int crrentPage = 1;
-    int recordsPerPage = 10;
-    int start = (crrentPage - 1) * recordsPerPage;
-    int articleTotalCount;
-    int totalPages ;
+    Integer crrentPage = 1;
+    Integer recordsPerPage = 10;
+    Integer start = (crrentPage - 1) * recordsPerPage;
+    Integer articleTotalCount;
+    Integer totalPages ;
 }
