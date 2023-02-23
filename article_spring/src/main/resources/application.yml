@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    jdbc-url: jdbc:mariadb://127.0.0.1:3306/study_model1
+    username: model1
+    password: model1
+
+
+mybatis:
+  type-aliases-package: com.koo.article_spring.domain
+  mapper-locations: com/koo/article_spring/mapper/*.xml
+
+
+logging:
+  level:
+    root: INFO
+    com.koo.article_spring: DEBUG
+    com.koo.article_spring.repository: TRACE
