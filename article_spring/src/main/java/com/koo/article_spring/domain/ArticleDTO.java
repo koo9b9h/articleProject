@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 @Data
 public class ArticleDTO {
-    private String categoryName;
+    private Integer articleId;
     private String author;
     private String password;
     private String title;
