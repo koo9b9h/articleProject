@@ -32,7 +32,7 @@
             searchDTO.setCategoryName(request.getParameter("category"));
         }
 
-        if (request.getParameter("searchTerm") != "" && request.getParameter("searchTerm") != null) {
+        if (request.getParameter("searchTerm").replaceAll(" ","").equals("") && request.getParameter("searchTerm") != null) {
             searchDTO.setSearchTerm(request.getParameter("searchTerm"));
         }
 

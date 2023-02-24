@@ -1,6 +1,5 @@
 package com.example.model1_article.DAO;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;

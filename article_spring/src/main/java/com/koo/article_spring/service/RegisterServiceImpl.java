@@ -1,7 +1,7 @@
 package com.koo.article_spring.service;
 
 import com.koo.article_spring.domain.ArticleDTO;
-import com.koo.article_spring.domain.CategoryVO;
+import com.koo.article_spring.domain.CategoryDTO;
 import com.koo.article_spring.repository.mybatis.CategoryMapper;
 import com.koo.article_spring.repository.mybatis.RegisterMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,10 @@ public class RegisterServiceImpl implements RegisterService {
     private final RegisterMapper registerMapper;
 
     @Override
-    public Integer getCategoryId(String categoryName) {
-        List<CategoryVO> categories = this.categoryMapper.getAllCategories();
+    public Integer getCategoryId(String categoryName) throws Exception {
+        List<CategoryDTO> categories = this.categoryMapper.getAllCategories();
         Integer categoryId = null;
-        for (CategoryVO category : categories) {
+        for (CategoryDTO category : categories) {
             if(category.getCategoryName().equals(categoryName)){
                 categoryId = category.getCategoryId();
             }
@@ -34,7 +34,7 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public void registerArticle(ArticleDTO articleDTO) {
+    public void registerArticle(ArticleDTO articleDTO) throws Exception {
         Timestamp insertTime = new Timestamp(System.currentTimeMillis());
         articleDTO.setCreateTime(insertTime);
         articleDTO.setModifiedTime(insertTime);

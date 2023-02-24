@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="/css/list.css" rel="stylesheet">
+
+  <title>게시글 목록</title>
+</head>
+
+<body>
+
+<header>
+  <h1>자유 게시판 - 목록</h1>
+  <div id="requirement">
+    <form action="/boards/free/list" method="get">
+      <label for="startDate">등록일 </label>
+      <input type="date" id="startDate" name="startDate" th:value="${startDate}" />
+
+      <label for="endDate">~</label>
+      <input type="date" id="endDate" name="endDate" th:value="${endDate}" />
+
+      <select id="category" name="category">
+        <option value="all">전체 카테고리</option>
+        <option th:each="categoryName : ${categoryNames}" th:value="${categoryName.getCategoryName()}" th:text="${categoryName.getCategoryName()}"></option>
+        </option>
+      </select>
+
+      <input type="text" id="searchTerm" name="searchTerm" th:value="${searchTerm}" />
+
+      <input type="submit" value="검색">
+    </form>
+  </div>
+</header>
+
+<section>
+  <header>
+     <span th:text="${'총 '+ pageDTO.articleTotalCount + ' 건'}"/>
+  </header>
+  <article>
+    <table>
+      <thead>
+      <tr>
+        <th>카테고리</th>
+        <th>첨부</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+        <th>등록일시</th>
+        <th>수정일시</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:if="${not #lists.isEmpty(articles)}">
+        <th:block th:each="article : ${articles}">
+          <tr>
+            <td>[[${article.categoryId}]]</td>
+            <td></td>
+            <td>[[${article.title}]]</td>
+            <td>[[${article.author}]]</td>
+            <td>[[${article.view}]]</td>
+            <td>[[${article.createTime}]]</td>
+            <td>[[${article.modifiedTime}]]</td>
+          </tr>
+        </th:block>
+      </th:block>
+      </tbody>
+    </table>
+  </article>
+
+  <footer>
+    <div id="pageDiv">
+      <th:block th:if="${pageDTO.crrentPage > 1}">
+        <a th:href="@{${pageUri}(currentPage=1)}">◀◀</a>
+        <a th:href="@{${pageUri}(currentPage=${pageDTO.crrentPage - 1})}">◀</a>
+      </th:block>
+
+      <th:block th:if="${pageDTO.crrentPage == 1}">
+        <span>◀◀</span>
+        <span>◀</span>
+      </th:block>
+
+      <th:block th:each="pageCount : ${#numbers.sequence(1, pageDTO.totalPages)}">
+        <th:block th:if="${pageCount == pageDTO.crrentPage}">
+          <span id="currentPage" th:text="${pageCount}"></span>
+        </th:block>
+        <th:block th:if="${pageCount != pageDTO.crrentPage && pageCount > (pageDTO.crrentPage/5) * 5 && pageCount <= (pageDTO.crrentPage/5+1)* 5}">
+          <a th:href="@{${pageUri}(currentPage=${pageCount})}" th:text="${pageCount}"></a>
+        </th:block>
+      </th:block>
+
+      <th:block th:if="${pageDTO.crrentPage < pageDTO.totalPages}">
+        <a th:href="@{${pageUri}(currentPage=${pageDTO.crrentPage+1})}">▶</a>
+        <a th:href="@{${pageUri}(currentPage=${pageDTO.totalPages})}">▶▶</a>
+      </th:block>
+
+      <th:block th:if="${pageDTO.crrentPage == pageDTO.totalPages}">
+        <span>▶</span>
+        <span>▶▶</span>
+      </th:block>
+    </div>
+
+    <button onclick="location.href='/boards/free/write'">작성</button>
+  </footer>
+</section>
+</body>
+</html>

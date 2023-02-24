@@ -8,8 +8,8 @@ spring:
 
 mybatis:
   type-aliases-package: com.koo.article_spring.domain
-  mapper-locations: com/koo/article_spring/mapper/*.xml
-
+  mapper-locations: classpath:/mapper/*.xml
+#  config-location: /mybatis-config.xml
 
 logging:
   level:

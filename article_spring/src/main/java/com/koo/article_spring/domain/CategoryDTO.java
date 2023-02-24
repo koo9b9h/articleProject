@@ -1,9 +1,10 @@
 package com.koo.article_spring.domain;
 
+import lombok.Data;
 import lombok.Value;
 
-@Value
-public class CategoryVO {
+@Data
+public class CategoryDTO {
     Integer categoryId;
     String categoryName;
 }

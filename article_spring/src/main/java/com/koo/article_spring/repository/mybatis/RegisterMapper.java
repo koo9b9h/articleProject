@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RegisterMapper {
     @Insert("INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time) " +
             "VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime})")
-    void insertArtcle(ArticleDTO articleDTO);
+    void insertArtcle(ArticleDTO articleDTO) throws Exception;
 }
