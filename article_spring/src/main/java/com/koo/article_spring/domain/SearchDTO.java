@@ -10,8 +10,10 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchDTO {
-    Timestamp startDate;
-    Timestamp endDate;
-    Integer categoryId;
-    String searchTerm;
+
+    private Timestamp startDate;
+    private Timestamp endDate;
+    private Integer categoryId;
+    private String searchTerm;
+    private String categoryName;
 }

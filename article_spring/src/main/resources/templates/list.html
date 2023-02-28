@@ -13,12 +13,12 @@
   <div id="requirement">
     <form action="/boards/free/list" method="get">
       <label for="startDate">등록일 </label>
-      <input type="date" id="startDate" name="startDate" th:value="${startDate}" />
+      <input type="date" id="startDate" name="startDate" th:value="${{startDate}}" />
 
       <label for="endDate">~</label>
-      <input type="date" id="endDate" name="endDate" th:value="${endDate}" />
+      <input type="date" id="endDate" name="endDate" th:value="${{endDate}}" />
 
-      <select id="category" name="category">
+      <select id="categoryName" name="categoryName">
         <option value="all">전체 카테고리</option>
         <option th:each="categoryName : ${categoryNames}" th:value="${categoryName.getCategoryName()}" th:text="${categoryName.getCategoryName()}"></option>
         </option>
@@ -52,13 +52,13 @@
       <th:block th:if="${not #lists.isEmpty(articles)}">
         <th:block th:each="article : ${articles}">
           <tr>
-            <td>[[${article.categoryId}]]</td>
+            <td>[[${article.categoryName}]]</td>
             <td></td>
             <td>[[${article.title}]]</td>
             <td>[[${article.author}]]</td>
             <td>[[${article.view}]]</td>
-            <td>[[${article.createTime}]]</td>
-            <td>[[${article.modifiedTime}]]</td>
+            <td>[[${{article.createTime}}]]</td>
+            <td>[[${{article.modifiedTime}}]]</td>
           </tr>
         </th:block>
       </th:block>

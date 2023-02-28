@@ -3,8 +3,8 @@ package com.koo.article_spring.controller;
 import com.koo.article_spring.controller.validation.ArticleInputData;
 import com.koo.article_spring.domain.ArticleDTO;
 import com.koo.article_spring.domain.CategoryDTO;
+import com.koo.article_spring.service.CategoryService;
 import com.koo.article_spring.service.RegisterService;
-import com.koo.article_spring.service.WriteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,43 +22,43 @@ import java.util.List;
 @Controller
 public class WriteController {
 
-    private final WriteService writeService;
+    private final CategoryService categoryService;
     private final RegisterService registerService;
 
+
+    /**
+     * 카테고리 목록 보여지게 모델에 담아보내기
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/write")
-    public String showCategoryNames(Model model) {
-        try {
-            List<CategoryDTO> categoryNames = writeService.getCategoryNames();
-            model.addAttribute("categoryNames", categoryNames);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String showCategoryNames(Model model) throws Exception {
+
+        List<CategoryDTO> categoryNames = categoryService.getCategoryAll();
+        model.addAttribute("categoryNames", categoryNames);
+
+
         return "write";
     }
 
+    /**
+     * 저장 버튼 눌렀을 때 DTO에 담음.
+     */
     @PostMapping("/register")
-    public String register(@RequestParam String category, @RequestParam String author, @RequestParam String password,
-                           @RequestParam String confirm_password, @RequestParam String title, @RequestParam String content,
+    public String register(ArticleDTO articleDTO,
+                           @RequestParam String confirm_password,
                            @RequestParam MultipartFile attachment1, @RequestParam MultipartFile attachment2,
-                           @RequestParam MultipartFile attachment3) {
-        try {
-            ArticleDTO articleDTO = new ArticleDTO();
-            ArticleInputData articleInputData = new ArticleInputData();
+                           @RequestParam MultipartFile attachment3) throws Exception {
 
-            articleDTO.setCategoryId(registerService.getCategoryId(category));
-            articleDTO.setAuthor(author);
-            articleDTO.setPassword(password);
-            articleDTO.setTitle(title);
-            articleDTO.setContents(content);
-
-            if (!articleInputData.availableCheck(articleDTO, confirm_password)) {
-                return "redirect: /write";
-            }
-
-            registerService.registerArticle(articleDTO);
-        } catch (Exception e){
-            e.printStackTrace();
+        ArticleInputData articleInputData = new ArticleInputData();
+        articleDTO.setCategoryId(categoryService.getCategoryId(articleDTO.getCategoryName()));
+        if (!articleInputData.availableCheck(articleDTO, confirm_password)) {
+            return "redirect:/boards/free/write";
         }
-        return "redirect: /list";
+
+        registerService.registerArticle(articleDTO);
+
+        return "redirect:/boards/free/list";
     }
 }

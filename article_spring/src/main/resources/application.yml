@@ -16,3 +16,5 @@ logging:
     root: INFO
     com.koo.article_spring: DEBUG
     com.koo.article_spring.repository: TRACE
+
+    org.springframework.cache: info

@@ -19,7 +19,7 @@
         <tr>
           <td><h3>카테고리* </h3></td>
           <td>
-            <select name="category" required>
+            <select name="categoryName" required>
               <option th:each="categoryName : ${categoryNames}" th:value="${categoryName.getCategoryName()}" th:text="${categoryName.getCategoryName()}"></option>
             </select>
           </td>
@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td><h3>내용* </h3></td>
-          <td><textarea name="content" rows="30" cols="100" required></textarea></td>
+          <td><textarea name="contents" rows="30" cols="100" required></textarea></td>
         </tr>
         <tr>
           <td><h3>첨부 파일</h3></td>

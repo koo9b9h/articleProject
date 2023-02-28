@@ -13,11 +13,4 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WriteServiceImpl implements WriteService {
 
-    private final CategoryMapper categoryMapper;
-
-    @Override
-    public List<CategoryDTO> getCategoryNames() throws Exception {
-        List<CategoryDTO> categories = this.categoryMapper.getAllCategories();
-        return categories;
-    }
 }

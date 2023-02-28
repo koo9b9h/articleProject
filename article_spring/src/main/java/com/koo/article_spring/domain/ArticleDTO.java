@@ -6,8 +6,8 @@ import java.sql.Timestamp;
 
 @Data
 public class ArticleDTO {
-    private Integer articleId;
-    private String author;
+    private Integer articleId;  //PK.
+    private String author;  //저자
     private String password;
     private String title;
     private String contents;
@@ -15,4 +15,5 @@ public class ArticleDTO {
     private Timestamp createTime;
     private Timestamp modifiedTime;
     private Integer categoryId;
+    private String categoryName;
 }

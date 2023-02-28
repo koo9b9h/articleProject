@@ -15,24 +15,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
-    private final CategoryMapper categoryMapper;
+
     private final RegisterMapper registerMapper;
 
-    @Override
-    public Integer getCategoryId(String categoryName) throws Exception {
-        List<CategoryDTO> categories = this.categoryMapper.getAllCategories();
-        Integer categoryId = null;
-        for (CategoryDTO category : categories) {
-            if(category.getCategoryName().equals(categoryName)){
-                categoryId = category.getCategoryId();
-            }
-        }
-        if(categoryId == null){
-            throw new IllegalStateException("카테고리를 입력 해야합니다.");
-        }
-        return categoryId;
-    }
-
+    /**
+     * 게시글 저장 로직
+     * @param articleDTO
+     * @throws Exception
+     */
     @Override
     public void registerArticle(ArticleDTO articleDTO) throws Exception {
         Timestamp insertTime = new Timestamp(System.currentTimeMillis());

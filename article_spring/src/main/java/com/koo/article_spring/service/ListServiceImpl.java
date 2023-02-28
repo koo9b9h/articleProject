@@ -17,47 +17,24 @@ import java.util.List;
 public class ListServiceImpl implements ListService {
 
     private final ArticleListMapper articleListMapper;
-    private final CategoryMapper categoryMapper;
 
+    /*
+    getList( Pagination pagination ){
 
-    @Override
-    public List<CategoryDTO> getCategoryNames() throws Exception {
-        List<CategoryDTO> categories = this.categoryMapper.getAllCategories();
-        log.trace(categories.toString());
-        return categories;
-    }
+        int totalCount = service.getCount(pagination.getSearchParams() );
 
-    @Override
-    public Integer getCategoryId(String categoryName) throws Exception {
-        return categoryMapper.getCategoryId(categoryName);
-    }
+        pagination.setTotalCount(totalCount);
+        pagination.initialize();
 
-    @Override
-    public SearchDTO changeSearchData(InputSearchDTO inputSearchDTO, SearchDTO searchDTO) throws Exception {
-        Integer categoryId = this.getCategoryId(inputSearchDTO.getCategory());
-        String searchTerm = "";
-        if(inputSearchDTO.getSearchTerm() != null){
-            searchTerm = inputSearchDTO.getSearchTerm().replaceAll(" ", "");// split?..
-        }
-        String startDate = inputSearchDTO.getStartDate();
-        String endDate = inputSearchDTO.getEndDate();
+        List<Article> articles = service.getArticles( pagination );
 
-        Timestamp start = null;
-        Timestamp end = null;
+        setAttribute(pagination);
+        setAttribute(articles);
 
-        if (startDate != null && endDate != null && (!"".equals(startDate)) && (!"".equals(endDate))) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            start = new Timestamp(dateFormat.parse(startDate).getTime());
-            end = new Timestamp(dateFormat.parse(endDate).getTime());
-        }
+        //in view
+        pagination.getQueryString();    // searchTerm=xx&sdfwef=xx&
+    }*/
 
-        searchDTO.setCategoryId(categoryId);
-        searchDTO.setSearchTerm(searchTerm);
-        searchDTO.setStartDate(start);
-        searchDTO.setEndDate(end);
-
-        return searchDTO;
-    }
 
     @Override
     public List<ArticleDTO> selectList(SearchDTO searchDTO, PageDTO pageDTO) throws Exception {

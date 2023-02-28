@@ -5,5 +5,4 @@ import com.koo.article_spring.domain.CategoryDTO;
 import java.util.List;
 
 public interface WriteService {
-    public List<CategoryDTO> getCategoryNames() throws Exception;
 }
