@@ -2,14 +2,13 @@ package com.koo.article_spring.service;
 
 
 import com.koo.article_spring.domain.ArticleDTO;
-import com.koo.article_spring.domain.PageDTO;
-import com.koo.article_spring.domain.SearchDTO;
+import com.koo.article_spring.domain.Pagination;
 
 import java.util.List;
 
 public interface ListService {
-    List<ArticleDTO> selectList(SearchDTO searchDTO, PageDTO pageDTO) throws Exception;
+    List<ArticleDTO> getList(Pagination pagination) throws Exception;
 
-    PageDTO pageSetting(SearchDTO searchDTO, Integer currentPage) throws Exception;
-
+    Pagination pageSetting(Pagination pagination,Integer currentPage) throws Exception;
+    String createUri(Pagination pagination) throws Exception;
 }

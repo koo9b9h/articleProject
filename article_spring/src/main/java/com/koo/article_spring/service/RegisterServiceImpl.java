@@ -1,25 +1,22 @@
 package com.koo.article_spring.service;
 
 import com.koo.article_spring.domain.ArticleDTO;
-import com.koo.article_spring.domain.CategoryDTO;
-import com.koo.article_spring.repository.mybatis.CategoryMapper;
-import com.koo.article_spring.repository.mybatis.RegisterMapper;
+import com.koo.article_spring.repository.mybatis.ArticleMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
 
-    private final RegisterMapper registerMapper;
+    private final ArticleMapper articleMapper;
 
     /**
-     * 게시글 저장 로직
+     *
      * @param articleDTO
      * @throws Exception
      */
@@ -28,6 +25,6 @@ public class RegisterServiceImpl implements RegisterService {
         Timestamp insertTime = new Timestamp(System.currentTimeMillis());
         articleDTO.setCreateTime(insertTime);
         articleDTO.setModifiedTime(insertTime);
-        registerMapper.insertArtcle(articleDTO);
+        articleMapper.insertArticle(articleDTO);
     }
 }

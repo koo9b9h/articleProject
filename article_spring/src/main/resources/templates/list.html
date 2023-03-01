@@ -13,10 +13,10 @@
   <div id="requirement">
     <form action="/boards/free/list" method="get">
       <label for="startDate">등록일 </label>
-      <input type="date" id="startDate" name="startDate" th:value="${{startDate}}" />
+      <input type="date" id="startDate" name="startDate" th:value="${{pagiNation.startDate}}" />
 
       <label for="endDate">~</label>
-      <input type="date" id="endDate" name="endDate" th:value="${{endDate}}" />
+      <input type="date" id="endDate" name="endDate" th:value="${{pagiNation.endDate}}" />
 
       <select id="categoryName" name="categoryName">
         <option value="all">전체 카테고리</option>
@@ -24,7 +24,7 @@
         </option>
       </select>
 
-      <input type="text" id="searchTerm" name="searchTerm" th:value="${searchTerm}" />
+      <input type="text" id="searchTerm" name="searchTerm" th:value="${pagiNation.searchTerm}" />
 
       <input type="submit" value="검색">
     </form>
@@ -33,7 +33,7 @@
 
 <section>
   <header>
-     <span th:text="${'총 '+ pageDTO.articleTotalCount + ' 건'}"/>
+     <span th:text="${'총 '+ pagiNation.articleTotalCount + ' 건'}"/>
   </header>
   <article>
     <table>
@@ -68,31 +68,31 @@
 
   <footer>
     <div id="pageDiv">
-      <th:block th:if="${pageDTO.crrentPage > 1}">
+      <th:block th:if="${pagiNation.currentPage > 1}">
         <a th:href="@{${pageUri}(currentPage=1)}">◀◀</a>
-        <a th:href="@{${pageUri}(currentPage=${pageDTO.crrentPage - 1})}">◀</a>
+        <a th:href="@{${pageUri}(currentPage=${pagiNation.currentPage - 1})}">◀</a>
       </th:block>
 
-      <th:block th:if="${pageDTO.crrentPage == 1}">
+      <th:block th:if="${pagiNation.currentPage == 1}">
         <span>◀◀</span>
         <span>◀</span>
       </th:block>
 
-      <th:block th:each="pageCount : ${#numbers.sequence(1, pageDTO.totalPages)}">
-        <th:block th:if="${pageCount == pageDTO.crrentPage}">
+      <th:block th:each="pageCount : ${#numbers.sequence(1, pagiNation.totalPages)}">
+        <th:block th:if="${pageCount == pagiNation.currentPage}">
           <span id="currentPage" th:text="${pageCount}"></span>
         </th:block>
-        <th:block th:if="${pageCount != pageDTO.crrentPage && pageCount > (pageDTO.crrentPage/5) * 5 && pageCount <= (pageDTO.crrentPage/5+1)* 5}">
+        <th:block th:if="${pageCount != pagiNation.currentPage && pageCount > (pagiNation.currentPage/5) * 5 && pageCount <= (pagiNation.currentPage/5+1)* 5}">
           <a th:href="@{${pageUri}(currentPage=${pageCount})}" th:text="${pageCount}"></a>
         </th:block>
       </th:block>
 
-      <th:block th:if="${pageDTO.crrentPage < pageDTO.totalPages}">
-        <a th:href="@{${pageUri}(currentPage=${pageDTO.crrentPage+1})}">▶</a>
-        <a th:href="@{${pageUri}(currentPage=${pageDTO.totalPages})}">▶▶</a>
+      <th:block th:if="${pagiNation.currentPage < pagiNation.totalPages}">
+        <a th:href="@{${pageUri}(currentPage=${pagiNation.currentPage+1})}">▶</a>
+        <a th:href="@{${pageUri}(currentPage=${pagiNation.totalPages})}">▶▶</a>
       </th:block>
 
-      <th:block th:if="${pageDTO.crrentPage == pageDTO.totalPages}">
+      <th:block th:if="${pagiNation.currentPage == pagiNation.totalPages}">
         <span>▶</span>
         <span>▶▶</span>
       </th:block>

@@ -3,44 +3,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.koo.article_spring.repository.mybatis.ArticleListMapper">
-    <select id="getArticleTotalCount" parameterType="SearchDTO" resultType="Integer">
+<mapper namespace="com.koo.article_spring.repository.mybatis.ArticleMapper">
+    <select id="getArticleTotalCount" parameterType="Pagination" resultType="Integer">
         SELECT COUNT(*)
         FROM articles
         WHERE 1=1
-            <if test="categoryId != null">
-                AND category_id = #{categoryId}
-            </if>
-            <if test="searchTerm != null and !''.equals(searchTerm) ">
-                AND (author LIKE CONCAT('%', #{searchTerm}, '%') OR title LIKE CONCAT('%', #{searchTerm}, '%') OR contents LIKE CONCAT('%', #{searchTerm}, '%'))
-            </if>
-            <if test="startDate != null and endDate != null">
-                AND create_time BETWEEN #{startDate} AND #{endDate}
-            </if>
+        <if test="categoryId != null">
+            AND category_id = #{categoryId}
+        </if>
+        <if test="searchTerm != null and !''.equals(searchTerm) ">
+            AND (author LIKE CONCAT('%', #{searchTerm}, '%') OR title LIKE CONCAT('%', #{searchTerm}, '%') OR contents
+            LIKE CONCAT('%', #{searchTerm}, '%'))
+        </if>
+        <if test="startDate != null and endDate != null">
+            AND create_time BETWEEN #{startDate} AND #{endDate}
+        </if>
     </select>
 
-    <select id="getArticleList" resultType="ArticleDTO">
+    <select id="getArticleList" parameterType="Pagination" resultType="ArticleDTO">
         SELECT
-            title,
-            contents,
-            author,
-            views,
-            create_time,
-            modified_time,
-            category_id,
-            article_id
+        title,
+        contents,
+        author,
+        views,
+        create_time,
+        modified_time,
+        category_id,
+        article_id
         FROM articles
         WHERE 1=1
-        <if test="searchDTO.categoryId != null">
-            AND category_id = #{searchDTO.categoryId}
+        <if test="categoryId != null">
+            AND category_id = #{categoryId}
         </if>
-        <if test="searchDTO.searchTerm != null and !''.equals(searchDTO.searchTerm) ">
-            AND (author LIKE CONCAT('%', #{searchDTO.searchTerm}, '%') OR title LIKE CONCAT('%', #{searchDTO.searchTerm}, '%') OR contents LIKE CONCAT('%', #{searchDTO.searchTerm}, '%'))
+        <if test="searchTerm != null and !''.equals(searchTerm) ">
+            AND (author LIKE CONCAT('%', #{searchTerm}, '%') OR title LIKE CONCAT('%', #{searchTerm}, '%') OR contents
+            LIKE CONCAT('%', #{searchTerm}, '%'))
         </if>
-        <if test="searchDTO.startDate != null and searchDTO.endDate != null">
-            AND create_time BETWEEN #{searchDTO.startDate} AND #{searchDTO.endDate}
+        <if test="startDate != null and endDate != null">
+            AND create_time BETWEEN #{startDate} AND #{endDate}
         </if>
         ORDER BY article_id DESC
-        LIMIT #{pageDTO.start}, #{pageDTO.recordsPerPage}
+        LIMIT #{start}, #{recordsPerPage}
     </select>
+
+    <insert id="insertArticle" parameterType="ArticleDTO">
+        INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time)
+        VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime}
+    </insert>
 </mapper>
+
