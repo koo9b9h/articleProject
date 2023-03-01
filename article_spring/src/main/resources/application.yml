@@ -4,6 +4,11 @@ spring:
     jdbc-url: jdbc:mariadb://127.0.0.1:3306/study_model1
     username: model1
     password: model1
+  servlet.multipart:
+    enabled: true
+    max-file-size: 10MB
+
+file.upload-dir: C:\Users\82102\Desktop\myProject\ebrainStudy\articleProject\article_spring\upload
 
 
 mybatis:
@@ -16,5 +21,4 @@ logging:
     root: INFO
     com.koo.article_spring: DEBUG
     com.koo.article_spring.repository: TRACE
-
     org.springframework.cache: info

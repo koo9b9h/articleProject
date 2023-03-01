@@ -46,9 +46,9 @@
         LIMIT #{start}, #{recordsPerPage}
     </select>
 
-    <insert id="insertArticle" parameterType="ArticleDTO">
+    <insert id="insertArticle" parameterType="ArticleDTO" useGeneratedKeys="true" keyProperty="articleId">
         INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time)
-        VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime}
+        VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime})
     </insert>
 </mapper>
 

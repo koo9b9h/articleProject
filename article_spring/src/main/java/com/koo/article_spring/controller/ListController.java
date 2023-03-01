@@ -25,6 +25,11 @@ public class ListController {
     private final ListService listService;
 
     /**
+     * TODO: currentPage 따로 받는게 아니라 pagination 으로 받게 고치기
+     * 1.카테고리 목록 보이기
+     * 2. 페이지(pagination) 세팅하기
+     * 3. pagination 정보를 이용해 uri 만들기
+     * 4. 세팅한 pagination 정보를 가지고 목록 가져오기
      * @param pagination
      * @param model
      * @param currentPage
