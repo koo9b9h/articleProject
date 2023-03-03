@@ -53,7 +53,7 @@ public class ListServiceImpl implements ListService {
 
     public String createUri(Pagination pagination) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromPath("/boards/free/list")
-                .queryParam("category", pagination.getCategoryName())
+                .queryParam("categoryName", pagination.getCategoryName())
                 .queryParam("searchTerm", pagination.getSearchTerm())
                 .queryParam("startDate", pagination.getStartDate())
                 .queryParam("endDate", pagination.getEndDate());

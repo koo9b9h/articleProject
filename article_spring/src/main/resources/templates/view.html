@@ -49,8 +49,8 @@
     <footer>
         <div>
             <a th:href="${list}">목록</a>
-            <a th:href="@{/boards/free/modify/${article.articleId}}">수정</a>
-            <a th:href="@{/boards/free/delete/${article.articleId}}">삭제</a>
+            <a th:href="@{/boards/free/modify/{id}(id=${article.articleId})}">수정</a>
+            <a th:href="@{/boards/free/delete/{id}(id=${article.articleId})}">삭제</a>
         </div>
     </footer>
 </body>

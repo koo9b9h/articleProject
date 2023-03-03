@@ -51,15 +51,21 @@
       <tbody>
       <th:block th:if="${not #lists.isEmpty(articles)}">
         <th:block th:each="article : ${articles}">
+
           <tr>
-            <td>[[${article.categoryName}]]</td>
-            <td></td>
-            <td>[[${article.title}]]</td>
-            <td>[[${article.author}]]</td>
-            <td>[[${article.views}]]</td>
-            <td>[[${{article.createTime}}]]</td>
-            <td>[[${{article.modifiedTime}}]]</td>
+              <td>[[${article.categoryName}]]</td>
+              <td ><img th:if="${article.hasFile}" src="/img/favicon.ico"></td>
+              <td>
+                <a th:href="@{/boards/free/view/{id}(id=${article.articleId})}">
+                  [[${article.title}]]
+                </a>
+              </td>
+              <td>[[${article.author}]]</td>
+              <td>[[${article.views}]]</td>
+              <td>[[${{article.createTime}}]]</td>
+              <td>[[${{article.modifiedTime}}]]</td>
           </tr>
+
         </th:block>
       </th:block>
       </tbody>

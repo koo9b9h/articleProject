@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.koo.article_spring.repository.mybatis.ArticleMapper">
+
+    <!-- 조건에 맞춘 게시글 수 반환  -->
     <select id="getArticleTotalCount" parameterType="Pagination" resultType="Integer">
         SELECT COUNT(*)
         FROM articles
@@ -20,17 +22,20 @@
         </if>
     </select>
 
+    <!--조건에 맞춘 게시글 반환-->
     <select id="getArticleList" parameterType="Pagination" resultType="ArticleDTO">
         SELECT
-        title,
-        contents,
-        author,
-        views,
-        create_time,
-        modified_time,
-        category_id,
-        article_id
+        articles.title AS title,
+        articles.contents AS contents,
+        articles.author AS author,
+        articles.views AS views,
+        articles.create_time AS create_time,
+        articles.modified_time AS modified_time,
+        articles.category_id AS category_id,
+        articles.article_id,
+        CASE WHEN COUNT(file_upload.article_id) > 0 THEN true ELSE false END AS has_file
         FROM articles
+        LEFT JOIN file_upload ON articles.article_id = file_upload.article_id
         WHERE 1=1
         <if test="categoryId != null">
             AND category_id = #{categoryId}
@@ -42,10 +47,12 @@
         <if test="startDate != null and endDate != null">
             AND create_time BETWEEN #{startDate} AND #{endDate}
         </if>
+        GROUP BY articles.article_id
         ORDER BY article_id DESC
         LIMIT #{start}, #{recordsPerPage}
     </select>
 
+    <!-- 단일 게시글 정보 반환 -->
     <select id="getArticle" parameterType="Integer" resultType="ArticleDTO">
         SELECT
             author,
@@ -60,15 +67,19 @@
         WHERE article_id = #{articleId}
     </select>
 
+    <!-- 게시글 등록 -->
     <insert id="insertArticle" parameterType="ArticleDTO" useGeneratedKeys="true" keyProperty="articleId">
         INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time)
         VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime})
     </insert>
 
+    <!-- 조회수 올리기 -->
     <update id="updateViews" parameterType="ArticleDTO">
         UPDATE articles
         SET views = #{views}
         WHERE article_id = #{articleId}
     </update>
+
+
 </mapper>
 

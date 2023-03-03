@@ -21,5 +21,4 @@ public interface ArticleMapper {
     ArticleDTO getArticle(Integer articleId) throws Exception;
 
     void updateViews(ArticleDTO articleDTO) throws Exception;
-
 }

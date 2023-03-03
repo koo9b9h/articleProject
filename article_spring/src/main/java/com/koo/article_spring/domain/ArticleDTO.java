@@ -16,4 +16,5 @@ public class ArticleDTO {
     private Timestamp modifiedTime;
     private Integer categoryId;
     private String categoryName;
+    private Boolean hasFile;
 }
