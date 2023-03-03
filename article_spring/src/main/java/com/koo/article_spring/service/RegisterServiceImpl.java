@@ -21,13 +21,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegisterServiceImpl implements RegisterService {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
     private final ArticleMapper articleMapper;
     private final FileMapper fileMapper;
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     /**
-     *  1. 게시글정보와 첨부파일 정보를 등록한다.
+     * 1. 게시글정보와 첨부파일 정보를 등록한다.
+     *
      * @param articleDTO
      * @throws Exception
      */
@@ -49,6 +50,7 @@ public class RegisterServiceImpl implements RegisterService {
     /**
      * 1. 파일 업로드
      * 2. 업로드한 파일들의 정보를 넘겨준다.
+     *
      * @param uploadFiles
      * @return
      * @throws Exception

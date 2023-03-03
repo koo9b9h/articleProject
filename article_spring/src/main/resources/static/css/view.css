@@ -1,0 +1,114 @@
+
+/* 헤더 스타일 */
+header {
+    margin: 20px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+header h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+section header span {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+/* 내용 스타일 */
+article {
+    margin-bottom: 20px;
+}
+
+/* 첨부파일 스타일 */
+article ul {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+/* 댓글 스타일 */
+footer ul {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+footer ul li span {
+    display: block;
+}
+
+footer ul li hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #337ab7;
+}
+
+/* 댓글 폼 스타일 */
+footer form {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+}
+
+footer form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+    resize: none;
+    width: 100%;
+}
+
+footer form button {
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+footer form button:hover {
+    background-color: #337ab7;
+    color: #fff;
+}
+
+/* 하단 메뉴 스타일 */
+footer div {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+footer div a {
+    all: unset;
+    margin: 50px;
+    padding: 20px;
+    border: 4px solid #337ab7;
+    border-radius: 5px;
+    background-color: #337ab7;
+    font-weight: bolder;
+    color: #fff;
+}
+
+footer div a:hover {
+    background-color: #fff;
+    color: #337ab7;
+}
+
+hr {
+    border: 4px solid #337ab7;
+}

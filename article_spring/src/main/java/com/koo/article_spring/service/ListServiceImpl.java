@@ -20,7 +20,7 @@ public class ListServiceImpl implements ListService {
 
     /**
      * 리뷰대로 page랑 search에 대한 데이터를 함께 가져가도록 수정하고
-     * DTO생성자를 통해 한 번에 초기화 하고 정리하려고 하다가 고민!
+     * DTO생성자를 통해 한 번에 초기화 하고 정리하려고 하다가 고민
      * getList에서
      * 1. pagination에 대한 초기화 작업이 이뤄진다.
      * 2. 게시글에 대한 목록을 불러오는 작업도 이뤄진다.

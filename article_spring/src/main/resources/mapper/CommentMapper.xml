@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koo.article_spring.repository.mybatis.CommentMapper">
+    <select id="getComments" parameterType="Integer" resultType="CommentDTO">
+        SELECT *
+        FROM comments
+        WHERE article_id = #{articleId}
+    </select>
+
+    <insert id="insertComment" parameterType="CommentDTO" useGeneratedKeys="true" keyProperty="commentId">
+        INSERT INTO comments(comment_id, contents, create_time, article_id)
+        VALUES (#{commentId},#{contents},#{createTime},#{articleId})
+    </insert>
+</mapper>

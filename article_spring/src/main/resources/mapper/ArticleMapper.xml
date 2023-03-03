@@ -46,9 +46,29 @@
         LIMIT #{start}, #{recordsPerPage}
     </select>
 
+    <select id="getArticle" parameterType="Integer" resultType="ArticleDTO">
+        SELECT
+            author,
+            title,
+            views,
+            contents,
+            create_time,
+            category_id,
+            modified_time,
+            article_id
+        FROM articles
+        WHERE article_id = #{articleId}
+    </select>
+
     <insert id="insertArticle" parameterType="ArticleDTO" useGeneratedKeys="true" keyProperty="articleId">
         INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time)
         VALUES (#{categoryId}, #{author}, #{password}, #{title}, #{contents}, #{createTime}, #{modifiedTime})
     </insert>
+
+    <update id="updateViews" parameterType="ArticleDTO">
+        UPDATE articles
+        SET views = #{views}
+        WHERE article_id = #{articleId}
+    </update>
 </mapper>
 

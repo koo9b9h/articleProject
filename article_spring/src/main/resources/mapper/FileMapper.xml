@@ -8,5 +8,19 @@
         INSERT INTO file_upload (uuid, file_size, file_path, file_name, article_id)
         VALUES (#{uuid}, #{fileSize}, #{filePath}, #{fileName}, #{articleId})
     </insert>
+
+    
+    <select id="getFiles" parameterType="Integer" resultType="FileDTO">
+        SELECT *
+        FROM file_upload
+        WHERE article_id = #{articleId}
+    </select>
+
+    <select id="getFile" parameterType="String" resultType="FileDTO">
+        SELECT *
+        FROM file_upload
+        WHERE uuid = #{uuid}
+    </select>
+
 </mapper>
 

@@ -21,8 +21,8 @@ public class CategoryServiceImpl implements CategoryService{
     private final CategoryMapper categoryMapper;
 
     /**
-     * @CacheEvict는 DB와의 동기화를 위해 카테고리의 업데이트나 주기에 대해 적용시키기.
-     * @Cacheable(value = "category", key = "#root.methodName")  왜 다른 클래스에서 실행해야 동작되는지
+     * @CacheEvict는 변경소요가 현재 계획에는 없어서 이용안함
+     * @Cacheable(value = "category", key = "#root.methodName") 적용 메소드를 왜 다른 클래스에서 실행해야 동작되는지
      * -> AOP 동작방식에 따라서 프록시 객체를 거치지 않고 직접 호출되기 때문에
      * @return categories
      * @throws Exception

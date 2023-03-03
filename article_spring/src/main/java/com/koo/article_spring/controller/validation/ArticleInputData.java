@@ -2,6 +2,11 @@ package com.koo.article_spring.controller.validation;
 
 import com.koo.article_spring.domain.ArticleDTO;
 
+
+/**
+ * TODO
+ * validation 어노테이션으로 대체하기
+ */
 public class ArticleInputData {
     public boolean availableCheck(ArticleDTO articleDTO, String confirm_password) {
 

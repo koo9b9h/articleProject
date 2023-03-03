@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/view.css" rel="stylesheet">
+    <title>게시글 보기</title>
+</head>
+<body>
+    <h1>게시글 - 보기</h1>
+    <section>
+        <header>
+            <h2 th:text="${article.title}"></h2>
+            <span>등록자: <span th:text="${article.author}"></span></span>
+            <span>등록일: <span th:text="${article.createTime}"></span></span>
+            <span>수정일: <span th:text="${article.modifiedTime}"></span></span>
+            <span>조회수: <span th:text="${article.views}"></span></span>
+        </header>
+
+        <hr>
+
+        <article>
+            <div th:text="${article.contents}"></div>
+            <h4>첨부파일</h4>
+            <ul>
+                <li th:each="file : ${files}">
+                    <a th:href="@{/boards/free/download/{id}(id=${file.uuid})}" th:text="${file.fileName}"></a>
+                </li>
+            </ul>
+        </article>
+
+        <hr>
+
+        <footer>
+            <ul>
+                <li th:each="comment : ${comments}">
+                    <p><span th:text="${{comment.createTime}}"></span></p>
+                    <span th:text="${comment.contents}"></span>
+                    <hr>
+                </li>
+            </ul>
+            <form th:action="@{/boards/free/comment}" method="post">
+                <textarea name="contents" placeholder="댓글 입력"></textarea>
+                <input type="hidden" name="articleId" th:value="${article.articleId}">
+                <button type="submit">등록</button>
+            </form>
+        </footer>
+    </section>
+
+    <footer>
+        <div>
+            <a th:href="${list}">목록</a>
+            <a th:href="@{/boards/free/modify/${article.articleId}}">수정</a>
+            <a th:href="@{/boards/free/delete/${article.articleId}}">삭제</a>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
