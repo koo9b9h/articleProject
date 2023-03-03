@@ -56,11 +56,11 @@ public class RegisterServiceImpl implements RegisterService {
     public List<FileDTO> fileUpload(List<MultipartFile> uploadFiles) throws Exception {
         List<FileDTO> uploadFilesInformation = new ArrayList<>();
         for (MultipartFile uploadFile : uploadFiles) {
-            if (!uploadFile.isEmpty()) {
+            if (!"".equals(uploadFile.getOriginalFilename())) {
                 FileDTO fileDTO = new FileDTO(uploadFile);
-                fileDTO.setFilePath(uploadDir);
+                fileDTO.setFilePath(uploadDir + "/" + fileDTO.getUuid() + "." + fileDTO.getExtension());
                 uploadFilesInformation.add(fileDTO);
-                Path path = Paths.get(fileDTO.getFilePath() + "/" + fileDTO.getUuid() + "." + fileDTO.getExtension());
+                Path path = Paths.get(fileDTO.getFilePath());
                 uploadFile.transferTo(path);
             }
         }

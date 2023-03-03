@@ -11,7 +11,7 @@ public class ArticleDTO {
     private String password;
     private String title;
     private String contents;
-    private int view;
+    private int views;
     private Timestamp createTime;
     private Timestamp modifiedTime;
     private Integer categoryId;
