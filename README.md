@@ -1,7 +1,7 @@
 # articleProject
 ## 🚨 간략한 소개
-1️⃣ model1_article: model 아키텍처로 만든 게시판 (1주)
-2️⃣ article_spring: spring framework와 mybatis를 사용한 게시판 (2주)
+- 1️⃣ model1_article: model 아키텍처로 만든 게시판 (1주)
+- 2️⃣ article_spring: spring framework와 mybatis를 사용한 게시판 (2주)
 
 #### 🧑‍ 💻예정
 1. veu3로 프론트단 분리 후 백단과 api로 데이터 이동 구현 
