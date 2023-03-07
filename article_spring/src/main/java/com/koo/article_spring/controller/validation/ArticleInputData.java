@@ -11,7 +11,6 @@ public class ArticleInputData {
     public boolean availableCheck(ArticleDTO articleDTO, String confirm_password) {
 
         if (articleDTO.getAuthor().length() < 3 || articleDTO.getAuthor().length() >= 5) {
-            System.out.println(articleDTO.getAuthor() + "/" + articleDTO.getAuthor().length());
             return false;
         }
 
@@ -24,7 +23,6 @@ public class ArticleInputData {
         }
 
         if (articleDTO.getTitle().length() < 4 || articleDTO.getTitle().length() >= 100) {
-            System.out.println(articleDTO.getTitle() + "/" + articleDTO.getTitle().length());
             return false;
         }
 

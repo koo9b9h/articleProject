@@ -67,6 +67,13 @@
         WHERE article_id = #{articleId}
     </select>
 
+    <!-- 비밀번호 얻기 -->
+    <select id="getPassword" parameterType="Integer" resultType="String">
+        SELECT password
+        FROM articles
+        WHERE article_id = #{articleId}
+    </select>
+
     <!-- 게시글 등록 -->
     <insert id="insertArticle" parameterType="ArticleDTO" useGeneratedKeys="true" keyProperty="articleId">
         INSERT INTO articles (category_id, author, password, title, contents, create_time, modified_time)
@@ -80,6 +87,11 @@
         WHERE article_id = #{articleId}
     </update>
 
-
+    <!-- 게시글 수정  -->
+    <update id="updateArticle" parameterType="ArticleDTO">
+        UPDATE articles
+        SET modified_time = #{modifiedTime}, author = #{author}, title = #{title}, contents = #{contents}
+        WHERE article_id = #{articleId}
+    </update>
 </mapper>
 

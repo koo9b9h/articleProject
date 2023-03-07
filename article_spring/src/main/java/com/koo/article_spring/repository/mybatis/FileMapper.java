@@ -14,4 +14,6 @@ public interface FileMapper {
     List<FileDTO> getFiles(Integer articleId) throws Exception;
 
     FileDTO getFile(String uuid) throws Exception;
+
+    void deleteFile(String uuid) throws Exception;
 }

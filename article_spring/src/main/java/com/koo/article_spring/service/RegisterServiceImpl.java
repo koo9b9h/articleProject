@@ -41,6 +41,16 @@ public class RegisterServiceImpl implements RegisterService {
 
         Integer articleId = articleDTO.getArticleId();
 
+        registerFileInformation(articleId,uploadFilesInformation);
+    }
+
+    /**
+     * 첨부파일의 정보를 db에 저장한다.
+     * @param articleId
+     * @param uploadFilesInformation
+     * @throws Exception
+     */
+    public void registerFileInformation(Integer articleId,List<FileDTO> uploadFilesInformation) throws Exception {
         for (FileDTO fileDTO : uploadFilesInformation) {
             fileDTO.setArticleId(articleId);
             fileMapper.insertFile(fileDTO);
@@ -50,7 +60,6 @@ public class RegisterServiceImpl implements RegisterService {
     /**
      * 1. 파일 업로드
      * 2. 업로드한 파일들의 정보를 넘겨준다.
-     *
      * @param uploadFiles
      * @return
      * @throws Exception
@@ -58,6 +67,7 @@ public class RegisterServiceImpl implements RegisterService {
     public List<FileDTO> fileUpload(List<MultipartFile> uploadFiles) throws Exception {
         List<FileDTO> uploadFilesInformation = new ArrayList<>();
         for (MultipartFile uploadFile : uploadFiles) {
+            if(uploadFile == null){continue;}
             if (!"".equals(uploadFile.getOriginalFilename())) {
                 FileDTO fileDTO = new FileDTO(uploadFile);
                 fileDTO.setFilePath(uploadDir + "/" + fileDTO.getUuid() + "." + fileDTO.getExtension());

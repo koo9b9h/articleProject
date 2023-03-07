@@ -46,11 +46,17 @@
         </footer>
     </section>
 
-    <footer>
+    <footer id="buttons">
         <div>
             <a th:href="${list}">목록</a>
-            <a th:href="@{/boards/free/modify/{id}(id=${article.articleId})}">수정</a>
-            <a th:href="@{/boards/free/delete/{id}(id=${article.articleId})}">삭제</a>
+            <form action="/boards/free/modify" method="post">
+                <input type="hidden" name="modify" th:value="${article.articleId}">
+                <button type="submit">수정</button>
+            </form>
+            <form action="/boards/free/delete" method="post">
+                <input type="hidden" name="delete" th:value="${article.articleId}">
+                <button type="submit">삭제</button>
+            </form>
         </div>
     </footer>
 </body>

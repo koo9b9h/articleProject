@@ -22,5 +22,10 @@
         WHERE uuid = #{uuid}
     </select>
 
+    <delete id="deleteFile" parameterType="String">
+        DELETE FROM file_upload
+        WHERE  uuid = #{uuid}
+    </delete>
+
 </mapper>
 

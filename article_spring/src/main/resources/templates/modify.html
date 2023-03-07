@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--  <script type="text/javascript" src="/js/validation.js"></script>-->
+  <link href="/css/write.css" rel="stylesheet">
+
+  <title>게시글 수정</title>
+</head>
+
+<body>
+<header>
+  <h1> 게시판 - 수정</h1>
+</header>
+
+<section>
+  <article>
+    <form id="modifyForm" name="modifyForm" action="/boards/free/modifyRegister" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="articleId" th:value="${article.articleId}">
+      <table>
+        <tr>
+          <td><h3>카테고리</h3></td>
+          <td>
+            <span th:text="${article.categoryName}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><h3>등록일시</h3></td>
+          <td>
+            <span th:text="${{article.createTime}}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><h3>수정일시</h3></td>
+          <td>
+            <span th:text="${{article.modifiedTime}}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><h3>조회수</h3></td>
+          <td>
+            <span th:text="${article.views}"></span>
+          </td>
+        </tr>
+        <tr>
+          <td><h3>작성자* </h3></td>
+          <td><input type="text" name="author" th:value="${article.author}" required></td>
+        </tr>
+        <tr>
+          <td><h3>비밀번호*</h3></td>
+          <td><input type="password" name="password" placeholder="비밀번호 확인" required></td>
+        </tr>
+        <tr>
+          <td><h3>제목* </h3></td>
+          <td><input type="text" name="title" th:value="${article.title}" required></td>
+        </tr>
+        <tr>
+          <td><h3>내용* </h3></td>
+          <td><textarea name="contents" rows="30" cols="100" th:text="${article.contents}" required></textarea></td>
+        </tr>
+        <tr>
+          <td><h3>첨부 파일</h3></td>
+          <td>
+            <ul>
+              <li th:each="file,iter : ${files}">
+                <a th:href="@{/boards/free/download/{id}(id=${file.uuid})}" th:text="${file.fileName}"></a>
+                <input type="checkbox" th:id="'file'+${iter.index}" th:name="'deleteFileUuid' + ${iter.index}" th:value="${file.uuid}" >
+                <label th:for="'file'+${iter.index}"><img src="/img/delete.ico"></label>
+              </li>
+            </ul>
+            <th:block th:if="${not(#lists.size(files) == 3)}">
+              <th:block th:each="i : ${#numbers.sequence(1, 3 - #lists.size(files))}">
+                <input  type="file" th:name="'attachment' + ${i}" ><br>
+              </th:block>
+            </th:block>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+  </article>
+  <footer>
+    <button onclick="location.href='/boards/free/list'">취소</button>
+    <input type="submit" form="modifyForm" value="저장" onclick="">
+  </footer>
+</section>
+</body>
+</html>

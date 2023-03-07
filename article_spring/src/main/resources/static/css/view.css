@@ -6,6 +6,10 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+hr{
+    border-color: #0069d9;
+}
+
 header h2 {
     font-size: 28px;
     font-weight: bold;
@@ -69,7 +73,7 @@ footer form textarea {
     border: 1px solid #337ab7;
     border-radius: 5px;
     resize: none;
-    width: 100%;
+    width: 95%;
 }
 
 footer form button {
@@ -87,28 +91,33 @@ footer form button:hover {
 }
 
 /* 하단 메뉴 스타일 */
-footer div {
-    margin-top: 20px;
-    padding: 10px;
-    text-align: center;
+#buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
 }
 
-footer div a {
-    all: unset;
-    margin: 50px;
-    padding: 20px;
-    border: 4px solid #337ab7;
-    border-radius: 5px;
-    background-color: #337ab7;
-    font-weight: bolder;
+#buttons a,
+#buttons button {
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
     color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-footer div a:hover {
-    background-color: #fff;
-    color: #337ab7;
+#buttons a:hover,
+#buttons button:hover {
+    background-color: #0069d9;
 }
 
-hr {
-    border: 4px solid #337ab7;
+#buttons form {
+    display: inline;
+    border: none;
 }

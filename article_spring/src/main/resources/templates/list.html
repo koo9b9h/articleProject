@@ -54,7 +54,7 @@
 
           <tr>
               <td>[[${article.categoryName}]]</td>
-              <td ><img th:if="${article.hasFile}" src="/img/favicon.ico"></td>
+              <td ><img th:if="${article.hasFile}" src="/img/file.ico"></td>
               <td>
                 <a th:href="@{/boards/free/view/{id}(id=${article.articleId})}">
                   [[${article.title}]]
@@ -72,6 +72,7 @@
     </table>
   </article>
 
+<!-- TODO: 페이지보여주는 로직 다시 짜기 -->
   <footer>
     <div id="pageDiv">
       <th:block th:if="${pagiNation.currentPage > 1}">

@@ -35,6 +35,7 @@ public class ListServiceImpl implements ListService {
      */
     public List<ArticleDTO> getList(Pagination pagination) throws Exception {
         List<ArticleDTO> articles = articleMapper.getArticleList(pagination);
+        // TODO 캐시에 담긴 게시글 정보가 있다면 조회수 뽑아서 넣어주는 로직넣기
         return articleCategoryNameSet(articles);
     }
 
