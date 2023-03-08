@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TODO:
+ *
  * article정보 view에 넘겨주기
  * view에서 수정되는 form 정보들 받아서 service로직대로 처리
  */
@@ -71,8 +71,8 @@ public class ModifyController {
         modifyService.modifyArticle(articleDTO);
 
         // 첨부파일 수정(삭제)
-        List<String> deleteFilesUuid = getUuids(formdata);
-        modifyService.deleteFiles(deleteFilesUuid);
+        List<String> fileUuids = getUuids(formdata);
+        modifyService.deleteFiles(fileUuids);
 
         //첨부파일 수정(등록)
         List<MultipartFile> uploadFiles = Arrays.asList(attachment1, attachment2, attachment3);

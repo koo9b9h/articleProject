@@ -27,4 +27,6 @@ public interface ArticleMapper {
 
     @CacheEvict(value = "article")
     void updateArticle(ArticleDTO articleDTO) throws Exception;
+
+    void deleteArticle(Integer articleId) throws Exception;
 }

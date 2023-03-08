@@ -30,6 +30,7 @@ public class WriteController {
 
     /**
      * 카테고리 목록 보여주기
+     *
      * @param model
      * @return
      */
@@ -46,6 +47,7 @@ public class WriteController {
      * 1. 들어온 데이터 유효성 검증
      * 2. 첨부파일 업로드 및 첨부파일 정보생성
      * 3. 게시글 및 첨부파일 정보 등록
+     *
      * @param articleDTO
      * @param confirm_password
      * @param attachment1

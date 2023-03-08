@@ -1,9 +1,9 @@
 function validateForm() {
-    var author = document.forms["registerForm"]["author"].value;
-    var password = document.forms["registerForm"]["password"].value;
-    var confirm_password = document.forms["registerForm"]["confirm_password"].value;
-    var title = document.forms["registerForm"]["title"].value;
-    var content = document.forms["registerForm"]["content"].value;
+    let author = document.forms["registerForm"]["author"].value;
+    let password = document.forms["registerForm"]["password"].value;
+    let confirm_password = document.forms["registerForm"]["confirm_password"].value;
+    let title = document.forms["registerForm"]["title"].value;
+    let content = document.forms["registerForm"]["content"].value;
 
     if (author.length < 3 || author.length >= 5) {
         alert("작성자는 3글자 이상 5글자 미만으로 적어주세요");

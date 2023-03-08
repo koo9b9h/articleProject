@@ -14,4 +14,9 @@
         INSERT INTO comments(comment_id, contents, create_time, article_id)
         VALUES (#{commentId},#{contents},#{createTime},#{articleId})
     </insert>
+
+    <delete id="deleteComments" parameterType="Integer">
+        DELETE FROM comments
+        WHERE  article_id = #{articleId}
+    </delete>
 </mapper>

@@ -27,5 +27,9 @@
         WHERE  uuid = #{uuid}
     </delete>
 
+    <delete id="deleteFiles" parameterType="Integer">
+        DELETE FROM file_upload
+        WHERE  article_id = #{articleId}
+    </delete>
 </mapper>
 

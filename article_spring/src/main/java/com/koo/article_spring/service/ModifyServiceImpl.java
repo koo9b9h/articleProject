@@ -71,15 +71,16 @@ public class ModifyServiceImpl implements ModifyService {
 
     /**
      * 파일 삭제와 정보 삭제
-     * @param deleteFilesUuid
+     *
+     * @param fileUuids
      * @throws Exception
      */
-    public void deleteFiles(List<String> deleteFilesUuid) throws Exception {
-        for (String deleteFileUuid : deleteFilesUuid) {
-                FileDTO fileDTO = fileMapper.getFile(deleteFileUuid);
+    public void deleteFiles(List<String> fileUuids) throws Exception {
+        for (String fileUuid : fileUuids) {
+                FileDTO fileDTO = fileMapper.getFile(fileUuid);
                 File file = new File(fileDTO.getFilePath());
                 file.delete();
-                fileMapper.deleteFile(deleteFileUuid);
+                fileMapper.deleteFile(fileUuid);
         }
     }
 

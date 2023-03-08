@@ -10,4 +10,6 @@ public interface CommentMapper {
     List<CommentDTO> getComments(Integer articleId) throws Exception;
 
     void insertComment(CommentDTO commentDTO) throws Exception;
+
+    void deleteComments(Integer articleId) throws Exception;
 }
